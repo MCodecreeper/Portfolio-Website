@@ -4,7 +4,8 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import OrbitingTimeline from '../3d/OrbitingTimeLine';
 import styles from './About.module.css';
-import profileImage from '../../assets/hamza.jpg';
+
+const profileImage = '/assets/hamza.jpg';
 
 interface Stat {
   value: number;

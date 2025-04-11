@@ -21,7 +21,7 @@ const projects: Project[] = [
     techStack: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     liveLink: '',
     githubLink: 'https://github.com/MCodecreeper/BUXAAR.git',
-    image: '/src/assets/ecommerce.png',
+    image: '/assets/ecommerce.png',
   },
   {
     title: 'ZAARIC',
@@ -30,7 +30,7 @@ const projects: Project[] = [
     techStack: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
     liveLink: 'https://zaaric.com',
     githubLink: 'https://github.com/MCodecreeper/Zaaric-Website.git',
-    image: '/src/assets/zaaric.png',
+    image: '/assets/zaaric.png',
   },
   {
     title: '3D Portfolio',
@@ -39,7 +39,7 @@ const projects: Project[] = [
     techStack: ['React', 'Three.js', 'GSAP', 'TypeScript'],
     liveLink: '#',
     githubLink: 'https://github.com/MCodecreeper/Portfolio-Website.git',
-    image: '/src/assets/3D_portfolio.png',
+    image: '/assets/3d_portfolio.png',
   },
 ];
 

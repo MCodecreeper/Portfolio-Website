@@ -23,7 +23,7 @@ const speakingEvents: SpeakingEvent[] = [
       "Developed strong argumentation and public speaking skills",
       "Networked with debaters from various universities"
     ],
-    image: "/src/assets/lfinal_parliamentary.jpg"
+    image: "/assets/lfinal_parliamentary.jpg"
   },
   {
     title: "FCIT Career Fair 2025",
@@ -36,7 +36,7 @@ const speakingEvents: SpeakingEvent[] = [
       "Facilitated networking sessions between students and companies",
       "Organized workshops and panel discussions"
     ],
-    image: "/src/assets/publicSpeaking.jpg"
+    image: "/assets/publicSpeaking.jpg"
   },
   {
     title: "FCIT Annual Dinner 2025",
@@ -49,7 +49,7 @@ const speakingEvents: SpeakingEvent[] = [
       "Managed guest invitations and seating arrangements",
       "Ensured smooth event flow and entertainment"
     ],
-    image: "/src/assets/dinner.jpg"
+    image: "/assets/dinner.jpg"
   }
 ];
 
