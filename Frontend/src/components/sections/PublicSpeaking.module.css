@@ -1,0 +1,256 @@
+.publicSpeaking {
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+.publicSpeaking::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 10% 90%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(0, 231, 255, 0.1) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.header h2 {
+  font-size: 3rem;
+  color: #E0E7FF;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(90deg, #E0E7FF, #8A9CFF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.header h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #6366F1, transparent);
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #8A9CFF;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.eventsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.eventCard {
+  background: rgba(13, 27, 42, 0.6);
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(138, 156, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.eventCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #8A9CFF, transparent);
+}
+
+.eventImage {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 1.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.eventImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+
+.eventCard:hover {
+  transform: scale(1.1);
+}
+
+.eventCard:hover .eventImage img {
+  transform: scale(1.05);
+}
+
+.eventImage img[src*="parliamentary"]{
+  filter:brightness(1.1);
+}
+
+.eventCard:hover .eventImage img[src*="parliamentary"] {
+  transform: scale(1.05) ;
+}
+
+.eventHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.eventHeader h3 {
+  font-size: 1.5rem;
+  color: #E0E7FF;
+  margin: 0;
+}
+
+.date {
+  font-size: 0.9rem;
+  color: #8A9CFF;
+  background: rgba(138, 156, 255, 0.1);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+}
+
+.venue {
+  color: #8A9CFF;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.description {
+  color: #E0E7FF;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.highlightItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  color: #E0E7FF;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.bullet {
+  color: #8A9CFF;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.learnMore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #6366F1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.learnMore:hover {
+  color: #00E7FF;
+}
+
+.learnMore svg {
+  transition: transform 0.3s ease;
+}
+
+.learnMore:hover svg {
+  transform: translateX(5px);
+}
+
+.statsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+}
+
+.statCard {
+  text-align: center;
+  padding: 1.5rem 2.5rem;
+  background: rgba(13, 27, 42, 0.6);
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(138, 156, 255, 0.1);
+  min-width: 150px;
+}
+
+.statNumber {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #8A9CFF;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(90deg, #8A9CFF, #E0E7FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.statLabel {
+  color: #E0E7FF;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .publicSpeaking {
+    padding: 4rem 1rem;
+  }
+
+  .header h2 {
+    font-size: 2.5rem;
+  }
+
+  .eventsContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .statsContainer {
+    gap: 2rem;
+  }
+
+  .statCard {
+    padding: 1rem 2rem;
+    min-width: 120px;
+  }
+
+  .statNumber {
+    font-size: 2rem;
+  }
+} 

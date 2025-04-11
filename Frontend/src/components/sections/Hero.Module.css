@@ -1,0 +1,189 @@
+.hero {
+  
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #0D1B2A;
+  }
+  
+  .heroContent {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    padding: 20px;
+  }
+
+  .heroContent h1 {
+    font-size: 4rem;
+    color: #00E7FF;
+    margin-bottom: 10px;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .heroContent h2 {
+    font-size: 2rem;
+    color: #7B00FF;
+    margin-bottom: 20px;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .heroContent p {
+    font-size: 1.2rem;
+    color: #E0E7FF;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .heroCta {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .ctaButton {
+    padding: 15px 30px;
+    background: #00E7FF;
+    color: #0D1B2A;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    transition: background 0.3s ease;
+  }
+  
+  .ctaButton:hover {
+    background: #7B00FF;
+    color: #E0E7FF;
+  }
+  
+  .secondary {
+    background: transparent;
+    border: 2px solid #00E7FF;
+    color: #00E7FF;
+  }
+  
+  .heroSocials {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .heroSocials a {
+    color: #E0E7FF;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .heroSocials a:hover {
+    color: #39FF14;
+  }
+
+   /* Master-Level Socials Styling */
+.hero-socials {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: #E0E7FF; /* Light text color */
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 231, 255, 0.2); /* Subtle cyan border */
+  border-radius: 50px; /* Pill shape */
+  background: rgba(13, 27, 42, 0.8); /* Dark semi-transparent bg */
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Icon Styling */
+.social-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #00E7FF; /* Cyan fill for LinkedIn SVG */
+  transition: transform 0.3s ease-in-out;
+}
+
+.email-icon {
+  font-size: 5.5rem; /* Emoji size */
+  color: #00E7FF; /* Cyan for email icon */
+}
+
+/* Hover Effects */
+.social-link:hover {
+  border-color: #00E7FF; /* Bright cyan border */
+  background: rgba(13, 27, 42, 0.95); /* Slightly opaque bg */
+  transform: translateY(-3px); /* Subtle lift */
+  box-shadow: 0 0 15px rgba(0, 231, 255, 0.5); /* Glowing shadow */
+}
+
+.social-link:hover .social-icon {
+  transform: scale(1.2) rotate(10deg); /* Icon pop and slight tilt */
+}
+
+/* Glowing Background Effect */
+.social-link::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 231, 255, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.4s ease-in-out;
+  z-index: -1;
+}
+
+.social-link:hover::before {
+  transform: translate(-50%, -50%) scale(1); /* Glow expands on hover */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-socials {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  .social-link {
+  
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+  }
+  .social-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroContent h2 {
+    font-size: 1.5rem;
+  }
+
+  .heroContent p {
+    font-size: 1rem;
+  }
+
+  .ctaButton {
+    padding: 10px 20px;
+  }
+}
+  
+
+ 

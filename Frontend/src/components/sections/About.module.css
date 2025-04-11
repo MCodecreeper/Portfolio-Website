@@ -1,0 +1,347 @@
+.about {
+  position: relative;
+  padding: 120px 20px;
+  background: linear-gradient(to bottom, #0D1B2A, #0A1420);
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.about h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #E0E7FF;
+  letter-spacing: 2px;
+  position: relative;
+  display: inline-block;
+}
+
+.about h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #6366F1, transparent);
+}
+
+.aboutContent {
+  display: flex;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 20px;
+}
+
+.aboutText {
+  flex: 1;
+  text-align: left;
+  background: rgba(13, 27, 42, 0.8);
+  padding: 40px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 231, 255, 0.2);
+  box-shadow: 0 0 20px rgba(0, 231, 255, 0.1);
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+}
+
+.aboutText p {
+  font-size: 1.2rem;
+  color: #E0E7FF;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  position: relative;
+  padding-left: 20px;
+  border-left: 2px solid #00E7FF;
+}
+
+.aboutStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.stat {
+  background: rgba(0, 231, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 231, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(0, 231, 255, 0.3);
+}
+
+.stat h3 {
+  font-size: 2.5rem;
+  color: #00E7FF;
+  margin-bottom: 10px;
+}
+
+.stat p {
+  font-size: 1rem;
+  color: #E0E7FF;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.profileImageContainer {
+  flex: 1;
+  position: relative;
+  max-width: 400px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 2px solid #00E7FF;
+  box-shadow: 0 0 30px rgba(0, 231, 255, 0.2);
+}
+
+.profileImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(1) contrast(1.1);
+  transform: scale(1.4);
+  transition: transform 0.3s ease;
+}
+
+.profileImageContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(0, 231, 255, 0.1),
+    rgba(0, 0, 0, 0.3)
+  );
+  z-index: 1;
+}
+
+.modelContainer {
+  position: absolute;
+  top: -9rem;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.modelContainer canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Large Desktop (1400px and above) */
+@media (min-width: 1400px) {
+  .aboutContent {
+    max-width: 1400px;
+  }
+  
+  .aboutText {
+    padding: 50px;
+  }
+  
+  .aboutText p {
+    font-size: 1.3rem;
+  }
+  
+  .stat h3 {
+    font-size: 3rem;
+  }
+}
+
+/* Desktop (1024px to 1399px) */
+@media (max-width: 1399px) {
+  .aboutContent {
+    max-width: 1200px;
+  }
+}
+
+/* Tablet Landscape (768px to 1023px) */
+@media (max-width: 1023px) {
+  .about {
+    padding: 100px 20px;
+  }
+  
+  .aboutContent {
+    gap: 40px;
+  }
+  
+  .aboutText {
+    padding: 30px;
+  }
+  
+  .aboutText p {
+    font-size: 1.1rem;
+  }
+  
+  .profileImageContainer {
+    max-width: 350px;
+    height: 450px;
+  }
+  
+  .stat h3 {
+    font-size: 2.2rem;
+  }
+}
+
+/* Tablet Portrait (576px to 767px) */
+@media (max-width: 767px) {
+  .about {
+    padding: 80px 20px;
+  }
+  
+  .aboutContent {
+    flex-direction: column;
+    gap: 40px;
+  }
+  
+  .aboutText {
+    text-align: center;
+    padding: 25px;
+  }
+  
+  .aboutText p {
+    padding-left: 0;
+    border-left: none;
+    border-bottom: 2px solid #00E7FF;
+    padding-bottom: 20px;
+  }
+  
+  .aboutStats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .profileImageContainer {
+    max-width: 300px;
+    height: 400px;
+  }
+  
+  .stat h3 {
+    font-size: 2rem;
+  }
+}
+
+/* Mobile Landscape (481px to 575px) */
+@media (max-width: 575px) {
+  .about {
+    padding: 60px 15px;
+  }
+  
+  .about h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .aboutText {
+    padding: 20px;
+  }
+  
+  .aboutText p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .aboutStats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+  
+  .stat {
+    padding: 15px;
+  }
+  
+  .stat h3 {
+    font-size: 1.8rem;
+  }
+  
+  .stat p {
+    font-size: 0.9rem;
+  }
+  
+  .profileImageContainer {
+    max-width: 250px;
+    height: 350px;
+  }
+}
+
+/* Mobile Portrait (320px to 480px) */
+@media (max-width: 480px) {
+  .about {
+    padding: 50px 10px;
+  }
+  
+  .about h2 {
+    font-size: 1.8rem;
+  }
+  
+  .aboutText {
+    padding: 15px;
+  }
+  
+  .aboutStats {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .stat {
+    padding: 12px;
+  }
+  
+  .stat h3 {
+    font-size: 1.6rem;
+  }
+  
+  .profileImageContainer {
+    max-width: 220px;
+    height: 300px;
+  }
+  
+  .modelContainer {
+    top: -5rem;
+    right: -30%;
+  }
+}
+
+/* Small Mobile (below 320px) */
+@media (max-width: 319px) {
+  .about {
+    padding: 40px 8px;
+  }
+  
+  .about h2 {
+    font-size: 1.5rem;
+  }
+  
+  .aboutText p {
+    font-size: 0.9rem;
+  }
+  
+  .stat h3 {
+    font-size: 1.4rem;
+  }
+  
+  .profileImageContainer {
+    max-width: 200px;
+    height: 280px;
+  }
+} 

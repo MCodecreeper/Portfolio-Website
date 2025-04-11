@@ -1,0 +1,120 @@
+.app {
+  background: #000000;
+  min-height: 100vh;
+  color: #E0E7FF;
+  font-family: 'Orbitron', sans-serif;
+  position: relative;
+  z-index: 1; /* Ensure the app container is above any background elements */
+}
+
+.main-content {
+  position: relative;
+  z-index: 2; /* Ensure all sections are above the 3D background */
+  padding: 20px; /* Add some padding around main content */
+}
+
+/* General Section Styling */
+section {
+  padding: 80px 20px;
+  margin-bottom: 40px; /* Space between sections */
+  max-width: 1600px; /* Limit content width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #76ABAE; /* Use a secondary color for headings */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Projects Section Styling */
+
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns */
+  gap: 30px; /* Space between cards */
+}
+
+/* Project Card Styling */
+.project-card {
+  background-color: #172A3A; /* Darker background for cards */
+  border-radius: 10px;
+  overflow: hidden; /* Ensure content respects border radius */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 123, 255, 0.3); /* Enhanced shadow on hover */
+}
+
+.project-card-canvas-container {
+  height: 200px; /* Fixed height for the 3D canvas */
+  width: 100%;
+  background-color: #0d1b2a; /* Match app background or choose another */
+  display: flex; /* Center canvas if renderer size is smaller */
+  align-items: center;
+  justify-content: center;
+}
+
+.project-card-content {
+  padding: 20px;
+  flex-grow: 1; /* Allows content to fill remaining space */
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card-content h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+  color: #E0E7FF; /* Card title color */
+}
+
+.project-card-content p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #b0bec5; /* Lighter text color for description */
+  flex-grow: 1; /* Push link to the bottom */
+  margin-bottom: 15px;
+}
+
+.project-card-link {
+  display: inline-block;
+  margin-top: auto; /* Pushes link to the bottom */
+  padding: 8px 15px;
+  background-color: #007bff; /* Link background color */
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.project-card-link:hover {
+  background-color: #0056b3; /* Darker background on hover */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 992px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  }
+}
+
+@media (max-width: 768px) {
+  section h2 {
+    font-size: 2rem;
+  }
+  .project-grid {
+    grid-template-columns: 1fr; /* 1 column */
+
+} }
