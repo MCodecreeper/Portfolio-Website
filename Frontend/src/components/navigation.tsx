@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { FC, useState, useEffect } from 'react';
 import styles from './Navbar.module.css';
 
-const Navbar = () => {
+const Navigation: FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -23,17 +23,17 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { to: 'home', label: 'Home' },
+    { to: 'hero', label: 'Home' },
     { to: 'about', label: 'About' },
     { to: 'projects', label: 'Projects' },
     { to: 'skills', label: 'Skills' },
     { to: 'contact', label: 'Contact' },
   ];
 
-  const handleScroll = (id) => {
+  const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
     setSidebarOpen(false); // Close sidebar on mobile
   };
@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
-        <a href="#home" className={styles.logo} onClick={(e) => { e.preventDefault(); handleScroll('home'); }}>
+        <a href="#home" className={styles.logo} onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
           Portfolio
         </a>
         {isMobile ? (
@@ -62,7 +62,7 @@ const Navbar = () => {
                       className={styles.sidebarLink}
                       onClick={(e) => {
                         e.preventDefault();
-                        handleScroll(link.to);
+                        scrollToSection(link.to);
                       }}
                     >
                       {link.label}
@@ -81,7 +81,7 @@ const Navbar = () => {
                   className={styles.navLink}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleScroll(link.to);
+                    scrollToSection(link.to);
                   }}
                 >
                   {link.label}
@@ -95,4 +95,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navigation;

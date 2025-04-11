@@ -10,6 +10,7 @@ interface Project {
   liveLink: string;
   githubLink: string;
   image: string;
+  modelPath?: string;
 }
 
 const projects: Project[] = [
@@ -18,8 +19,8 @@ const projects: Project[] = [
     description:
       'A full-stack e-commerce solution with real-time inventory, payment processing, and admin dashboard.',
     techStack: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    liveLink: 'https://ecommerce.example.com',
-    githubLink: 'https://github.com/yourusername/ecommerce',
+    liveLink: '',
+    githubLink: 'https://github.com/MCodecreeper/BUXAAR.git',
     image: '/src/assets/ecommerce.png',
   },
   {
@@ -28,7 +29,7 @@ const projects: Project[] = [
       'Modern tech agency website with stunning animations, interactive UI, and seamless user experience.',
     techStack: ['React', 'GSAP', 'Tailwind CSS', 'Framer Motion'],
     liveLink: 'https://zaaric.com',
-    githubLink: 'https://github.com/yourusername/zaaric',
+    githubLink: 'https://github.com/MCodecreeper/Zaaric-Website.git',
     image: '/src/assets/zaaric.png',
   },
   {
@@ -36,8 +37,8 @@ const projects: Project[] = [
     description:
       'Interactive 3D portfolio website showcasing projects with Three.js animations.',
     techStack: ['React', 'Three.js', 'GSAP', 'TypeScript'],
-    liveLink: '',
-    githubLink: 'https://github.com/yourusername/portfolio',
+    liveLink: '#',
+    githubLink: 'https://github.com/MCodecreeper/Portfolio-Website.git',
     image: '/src/assets/3D_portfolio.png',
   },
 ];

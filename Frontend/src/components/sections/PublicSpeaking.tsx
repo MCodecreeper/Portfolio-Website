@@ -44,7 +44,7 @@ const speakingEvents: SpeakingEvent[] = [
     venue: "FCIT, University of the Punjab",
     description: "Hosted the Annual Dinner for FCIT students and faculty",
     highlights: [
-      "Planned and executed the entire event program",
+      "Contributed in execution of the entire event program",
       "Coordinated with student societies and performers",
       "Managed guest invitations and seating arrangements",
       "Ensured smooth event flow and entertainment"

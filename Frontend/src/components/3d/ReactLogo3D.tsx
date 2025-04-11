@@ -16,7 +16,7 @@ const ReactLogo3D: React.FC = () => {
     // Create the logo with responsive size
     const getLogoSize = () => {
       const width = window.innerWidth;
-      if (width <= 480) return 0.8;      // Small mobile
+      if (width <= 480) return 0.7;      // Small mobile
       if (width <= 768) return 1.5;      // Mobile
       if (width <= 1024) return 1.8;     // Tablet
       return 2;                          // Desktop
@@ -35,7 +35,7 @@ const ReactLogo3D: React.FC = () => {
     // Get responsive x position
     const getXPosition = () => {
       const width = window.innerWidth;
-      if (width <= 480) return 0;      // Small mobile (move right)
+      if (width <= 480) return -0.25;    // Small mobile (move right)
       if (width <= 768) return 0.2;      // Mobile (slightly right)
       if (width <= 1024) return -0.2;    // Tablet (slightly left)
       return -0.5;                       // Desktop (original position)
@@ -48,89 +48,107 @@ const ReactLogo3D: React.FC = () => {
     logo.position.x = getXPosition();
     logo.position.z = 0;
     scene.add(logo);
+    
+    // Create particles with validated positions
+    const createParticlesGeometry = () => {
+      const width = window.innerWidth;
+      // Increase particle count for better coverage
+      const particlesCount = width < 768 ? 150 : 200;
+      const positions = new Float32Array(particlesCount * 3);
+      // Adjust radius for better spread
+      const radius = width < 768 ? 13 : 35;
+      
+      for (let i = 0; i < particlesCount * 3; i += 3) {
+        // Create a more balanced distribution
+        const theta = Math.random() * Math.PI * 2;
+        const phi = Math.random() * Math.PI * 2;
+        const r = (Math.random() * 0.5 + 0.5) * radius; // Ensure minimum radius for better spread
+        
+        // Use spherical coordinates with offset for balanced distribution
+        positions[i] = r * Math.sin(phi) * Math.cos(theta) + (Math.random() - 0.5) * 10;     // x with random offset
+        positions[i + 1] = r * Math.sin(phi) * Math.sin(theta) + (Math.random() - 0.5) * 10; // y with random offset
+        positions[i + 2] = r * Math.cos(phi) + (Math.random() - 0.5) * 5;                    // z with smaller random offset
+        
+        // Validate positions
+        if (isNaN(positions[i])) positions[i] = 0;
+        if (isNaN(positions[i + 1])) positions[i + 1] = 0;
+        if (isNaN(positions[i + 2])) positions[i + 2] = 0;
+      }
+      
+      const particlesGeometry = new THREE.BufferGeometry();
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      return particlesGeometry;
+    };
 
-    // Create particles
-    const particlesGeometry = new THREE.BufferGeometry();
-    const particlesCount = window.innerWidth < 768 ? 150 : 200;
-    const positions = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount * 3; i += 3) {
-      const radius = window.innerWidth < 768 ? 10 : 14;
-      const theta = Math.random() * Math.PI * 2;
-      positions[i] = Math.cos(theta) * radius;
-      positions[i + 1] = (Math.random() - 0.5) * 3;
-      positions[i + 2] = Math.sin(theta) * radius;
-    }
-    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 4));
+    const particlesGeometry = createParticlesGeometry();
     const particlesMaterial = new THREE.PointsMaterial({ 
       color: 0x39FF14, 
-      size: window.innerWidth < 768 ? 0.09 : 0.12
+      size: window.innerWidth < 768 ? 0.15 : 0.3,
+      transparent: true,
+      opacity: 0.6,
+      sizeAttenuation: true
     });
+    
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    particles.position.z = -3;
-    particles.position.x = getXPosition() - 3.5; // Adjust particles x position relative to logo
-    particles.position.y = getYPosition(); // Match particles y position with logo
+    particles.position.z = -8;  // Move particles even further back for better spread
+    particles.position.x = getXPosition() - 2; // Centered position
+    particles.position.y = getYPosition();
     scene.add(particles);
 
-    // Position camera based on screen size
     camera.position.z = window.innerWidth < 768 ? 8 : 10;
     camera.position.y = window.innerWidth < 768 ? 1.5 : 2;
 
-    // Animation
     const animate = () => {
       requestAnimationFrame(animate);
-      logo.rotation.y += window.innerWidth < 768? 0.007 : 0.01;
-      particles.rotation.y += window.innerWidth < 768? 0.005 : 0.007;
+      logo.rotation.y += window.innerWidth < 768 ? 0.007 : 0.01;
+      particles.rotation.y += window.innerWidth < 768 ? 0.003 : 0.004;
       renderer.render(scene, camera);
     };
     animate();
 
-    // Handle resize
     const handleResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-
-      // Update camera
+      
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-
-      // Update renderer
       renderer.setSize(width, height);
 
-      // Update logo size and position
       const newSize = getLogoSize();
       const newYPosition = getYPosition();
       const newXPosition = getXPosition();
+      
       logo.scale.set(newSize, newSize, 1);
       logo.position.y = newYPosition;
       logo.position.x = newXPosition;
-      particles.position.y = newYPosition;
-      particles.position.x = newXPosition - 3.5; // Adjust particles x position relative to logo
-
-      // Update particles
-      const newParticlesCount = width < 768 ? 100 : 200;
-      const newPositions = new Float32Array(newParticlesCount * 3);
-      const radius = width < 768 ? 10 : 14;
       
-      for (let i = 0; i < newParticlesCount * 3; i += 3) {
-        const theta = Math.random() * Math.PI * 2;
-        newPositions[i] = Math.cos(theta) * radius;
-        newPositions[i + 1] = (Math.random() - 0.5) * 3;
-        newPositions[i + 2] = Math.sin(theta) * radius;
+      // Update particles with validated geometry
+      const newParticlesGeometry = createParticlesGeometry();
+      particles.geometry.dispose(); // Clean up old geometry
+      particles.geometry = newParticlesGeometry;
+      
+      particles.position.y = newYPosition;
+      particles.position.x = newXPosition - 5.5;
+      
+      if (particles.material instanceof THREE.PointsMaterial) {
+        particles.material.size = width < 768 ? 0.1 : 0.12;
       }
 
-      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(newPositions, 4));
-      particlesMaterial.size = width < 768 ? 0.08 : 0.1;
-
-      // Update camera position
       camera.position.z = width < 768 ? 8 : 10;
       camera.position.y = width < 768 ? 1.5 : 2;
     };
-
+    
     window.addEventListener('resize', handleResize);
-
+    
     return () => {
       window.removeEventListener('resize', handleResize);
       mountRef.current?.removeChild(renderer.domElement);
+      
+      // Proper cleanup
+      geometry.dispose();
+      material.dispose();
+      particlesGeometry.dispose();
+      particlesMaterial.dispose();
       renderer.dispose();
     };
   }, []);

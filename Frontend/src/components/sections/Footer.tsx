@@ -17,9 +17,8 @@ const Footer: React.FC = () => {
           <a href="#contact">Contact</a>
         </div>
         <div className="footer-socials">
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <a href="https://github.com/MCodecreeper" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://www.linkedin.com/in/hamza-kamran-7b1a85294/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
       <div className="footer-bottom">

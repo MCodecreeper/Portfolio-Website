@@ -1,29 +1,83 @@
-import React, { useEffect, useRef, useState } from 'react';
-import OrbitingTimeline from '../3d/OrbitingTimeLine';
-import styles from './About.module.css';
+import React, { useEffect, useRef, useState, useCallback, useMemo } from 'react';
+import { motion, Variants } from 'framer-motion';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import OrbitingTimeline from '../3d/OrbitingTimeLine';
+import styles from './About.module.css';
 import profileImage from '../../assets/hamza.jpg';
-import { motion } from 'framer-motion';
+
+interface Stat {
+  value: number;
+  label: string;
+}
+
+const STATS: Stat[] = [
+  { value: 2, label: 'Years of Experience' },
+  { value: 15, label: 'Projects Completed' },
+  { value: 5, label: 'Tech Stacks Mastered' }
+];
+
+const ANIMATION_CONFIG = {
+  duration: 1500,
+  stepTime: 20,
+};
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 10,
+    },
+  },
+};
 
 const About: React.FC = () => {
   const statsRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.2 }
-    );
+  const handleIntersection = useCallback((entries: IntersectionObserverEntry[]) => {
+    const [entry] = entries;
+    setIsVisible(entry.isIntersecting);
+  }, []);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
     return () => observer.disconnect();
+  }, [handleIntersection]);
+
+  const animateNumber = useCallback((element: Element, targetValue: number) => {
+    let current = 0;
+    const increment = targetValue / (ANIMATION_CONFIG.duration / ANIMATION_CONFIG.stepTime);
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= targetValue) {
+        current = targetValue;
+        clearInterval(timer);
+      }
+      element.textContent = Math.floor(current).toString() + '+';
+    }, ANIMATION_CONFIG.stepTime);
+
+    return timer;
   }, []);
 
   useEffect(() => {
@@ -31,79 +85,47 @@ const About: React.FC = () => {
     if (!statsSection) return;
 
     const statsElements = statsSection.querySelectorAll(`.${styles.stat} h3`);
-    const targetValues = Array.from(statsElements).map((el) =>
-      parseInt(el.textContent || '0', 10)
-    );
-
-    const animateNumbers = () => {
-      statsElements.forEach((el, index) => {
-        let start = 0;
-        const end = targetValues[index];
-        const duration = 1500;
-        const stepTime = 20;
-        const steps = duration / stepTime;
-        const increment = end / steps;
-
-        let current = start;
-        const timer = setInterval(() => {
-          current += increment;
-          if (current >= end) {
-            current = end;
-            clearInterval(timer);
-          }
-          el.textContent = Math.floor(current).toString() + '+';
-        }, stepTime);
-      });
-    };
-
-    const resetNumbers = () => {
-      statsElements.forEach((el) => {
-        el.textContent = '0';
-      });
-    };
+    const timers: NodeJS.Timeout[] = [];
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      (entries) => {
+        const [entry] = entries;
         if (entry.isIntersecting) {
-          animateNumbers();
+          statsElements.forEach((el, index) => {
+            const timer = animateNumber(el, STATS[index].value);
+            timers.push(timer);
+          });
         } else {
-          resetNumbers();
+          statsElements.forEach((el) => {
+            el.textContent = '0';
+          });
+          timers.forEach(timer => clearInterval(timer));
+          timers.length = 0;
         }
       },
-      {
-        threshold: 0.5,
-        rootMargin: '0px',
-      }
+      { threshold: 0.5 }
     );
 
     observer.observe(statsSection);
+    return () => {
+      observer.disconnect();
+      timers.forEach(timer => clearInterval(timer));
+    };
+  }, [animateNumber]);
 
-    return () => observer.disconnect();
-  }, []);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
+  const canvasConfig = useMemo(() => ({
+    camera: { 
+      position: [0, 0, 20] as [number, number, number], 
+      fov: 45 
     },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 10,
-      },
-    },
-  };
+    lights: {
+      ambient: { intensity: 0.5 },
+      point: { 
+        position: [10, 10, 10] as [number, number, number],
+        intensity: 1
+      }
+    }
+  }), []);
 
   return (
     <section id="about" className={styles.about} ref={sectionRef}>
@@ -116,9 +138,9 @@ const About: React.FC = () => {
       </motion.h2>
       
       <div className={styles.modelContainer}>
-        <Canvas camera={{ position: [0, 0, 20], fov: 45 }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} />
+        <Canvas camera={canvasConfig.camera}>
+          <ambientLight {...canvasConfig.lights.ambient} />
+          <pointLight {...canvasConfig.lights.point} />
           <OrbitingTimeline />
           <OrbitControls enableZoom={false} />
         </Canvas>
@@ -142,18 +164,16 @@ const About: React.FC = () => {
             can find me exploring literature and politics.
           </motion.p>
           <motion.div className={styles.aboutStats} ref={statsRef} variants={itemVariants}>
-            <motion.div className={styles.stat} whileHover={{ scale: 1.05 }}>
-              <h3>2+</h3>
-              <p>Years of Experience</p>
-            </motion.div>
-            <motion.div className={styles.stat} whileHover={{ scale: 1.05 }}>
-              <h3>15+</h3>
-              <p>Projects Completed</p>
-            </motion.div>
-            <motion.div className={styles.stat} whileHover={{ scale: 1.05 }}>
-              <h3>5+</h3>
-              <p>Tech Stacks Mastered</p>
-            </motion.div>
+            {STATS.map((stat) => (
+              <motion.div 
+                key={stat.label}
+                className={styles.stat} 
+                whileHover={{ scale: 1.05 }}
+              >
+                <h3>0</h3>
+                <p>{stat.label}</p>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
         
@@ -162,7 +182,12 @@ const About: React.FC = () => {
           variants={itemVariants}
           whileHover={{ scale: 1.02 }}
         >
-          <img src={profileImage} alt="Hamza Kamran" className={styles.profileImage} />
+          <img 
+            src={profileImage} 
+            alt="Hamza Kamran" 
+            className={styles.profileImage}
+            loading="lazy"
+          />
         </motion.div>
       </motion.div>
     </section>
