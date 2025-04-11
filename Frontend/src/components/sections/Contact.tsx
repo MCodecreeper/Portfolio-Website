@@ -40,7 +40,12 @@ const Contact: React.FC = () => {
     setStatus({ loading: true, success: false, error: null });
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      if (!apiUrl) {
+        throw new Error('API URL is not defined. Please check your environment variables.');
+      }
+
+      const response = await fetch(`${apiUrl}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -51,16 +56,17 @@ const Contact: React.FC = () => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Something went wrong');
+        throw new Error(data.error || 'Failed to send message');
       }
 
       setStatus({ loading: false, success: true, error: null });
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      console.error('Error submitting form:', error);
       setStatus({
         loading: false,
         success: false,
-        error: error instanceof Error ? error.message : 'Failed to send message'
+        error: error instanceof Error ? error.message : 'Failed to send message. Please try again later.'
       });
     }
   };
@@ -108,7 +114,6 @@ const Contact: React.FC = () => {
             <a href="https://www.linkedin.com/in/hamza-kamran-7b1a85294/" target="_blank" rel="noopener noreferrer" className={styles.socialLink}>
               <FaLinkedin />
             </a>
-            
           </div>
         </div>
 
@@ -185,4 +190,3 @@ const Contact: React.FC = () => {
 };
 
 export default Contact;
-

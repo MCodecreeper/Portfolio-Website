@@ -11,7 +11,7 @@ const app = express();
 // Security Middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://hamza-portfolio-mocha.vercel.app/',
+  origin: process.env.FRONTEND_URL || 'https://hamza-portfolio-mocha.vercel.app/', // Replace with your frontend URL
   methods: ['POST'],
   allowedHeaders: ['Content-Type']
 }));
