@@ -3,7 +3,6 @@ class SoundManager {
   private static instance: SoundManager;
   private isMuted: boolean = false;
   private audioContext: AudioContext | null = null;
-  private sounds: Record<string, AudioBuffer> = {};
   private hoverTimeout: number | null = null;
   private isMobile: boolean = false;
 

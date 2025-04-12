@@ -12,14 +12,15 @@ const Cursor = () => {
     };
 
     const updateCursorType = () => {
-      const target = document.elementFromPoint(position.x, position.y) as HTMLElement;
+      const target = document.elementFromPoint(position.x, position.y);
       if (target) {
-        const isClickable = 
-          target.tagName === 'A' || 
-          target.tagName === 'BUTTON' || 
+        const isClickable: boolean = Boolean(
+          target instanceof HTMLAnchorElement || 
+          target instanceof HTMLButtonElement || 
           target.closest('a') || 
           target.closest('button') ||
-          target.classList.contains('clickable');
+          target.classList.contains('clickable')
+        );
         
         setIsPointer(isClickable);
       }
