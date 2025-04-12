@@ -1,0 +1,25 @@
+.cursor {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: width 0.3s, height 0.3s, background 0.3s;
+}
+
+.pointer {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .cursor {
+    display: none;
+  }
+} 

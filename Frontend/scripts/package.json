@@ -1,0 +1,8 @@
+{
+  "name": "portfolio-scripts",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "download-sounds": "node download-sounds.js"
+  }
+} 
