@@ -14,6 +14,8 @@ import Cursor from './components/ui/Cursor';
 import LoadingScreen from './components/ui/LoadingScreen';
 import { useLoadingStore } from './store/loadingStore';
 import './App.css';
+import PublicSpeaking from './components/sections/PublicSpeaking';
+import Testimonials from './components/sections/testimonials';
 
 function App() {
   const { isLoading } = useLoadingStore();
@@ -65,7 +67,9 @@ function App() {
                 <Hero />
                 <About />
                 <Skills />
+                <Testimonials />
                 <Projects />
+                <PublicSpeaking />
                 <Contact />
               </main>
               <Footer />

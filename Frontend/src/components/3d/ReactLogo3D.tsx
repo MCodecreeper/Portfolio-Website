@@ -35,7 +35,7 @@ const ReactLogo3D: React.FC = () => {
     // Get responsive x position
     const getXPosition = () => {
       const width = window.innerWidth;
-      if (width <= 480) return -0.25;    // Small mobile (move right)
+      if (width <= 480) return 0;    // Small mobile (move right)
       if (width <= 768) return 0.2;      // Mobile (slightly right)
       if (width <= 1024) return -0.2;    // Tablet (slightly left)
       return -0.5;                       // Desktop (original position)
