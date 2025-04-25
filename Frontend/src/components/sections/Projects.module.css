@@ -75,6 +75,7 @@
   font-size: 3.5rem;
   color: #E0E7FF;;
   margin-bottom: 20px;
+  background-clip: text;
   text-shadow: 0 0 20px rgba(0, 231, 255, 0.3);
   position: relative;
   display: inline-block;
@@ -202,18 +203,19 @@
 }
 
 .projectLink {
-  padding: 8px 20px;
+  padding: 10px 20px;
   border-radius: 8px;
   font-size: 0.9rem;
+  font-weight: 500;
   text-decoration: none;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  flex: 1;
+  text-align: center;
 }
 
 .projectLink.primary {
   background: #00e7ff;
-  color: #0d1b2a;
+  color: #0D1B2A;
 }
 
 .projectLink.secondary {
@@ -224,7 +226,6 @@
 
 .projectLink:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 231, 255, 0.2);
 }
 
 .projectLink.primary:hover {
@@ -238,6 +239,7 @@
 @media (max-width: 1200px) {
   .projectGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
   }
 }
 
@@ -252,20 +254,22 @@
 
   .projectGrid {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 40px;
   }
 
   .projectCardCanvas {
-    height: 200px;
+    height: 250px;
   }
 }
 
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
+  0% {
+    transform: translateY(0px);
   }
   50% {
     transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }

@@ -16,6 +16,7 @@ import { useLoadingStore } from './store/loadingStore';
 import './App.css';
 import PublicSpeaking from './components/sections/PublicSpeaking';
 import Testimonials from './components/sections/testimonials';
+import Philosophy from './components/sections/Philosophy';
 
 function App() {
   const { isLoading } = useLoadingStore();
@@ -67,6 +68,7 @@ function App() {
                 <Hero />
                 <About />
                 <Skills />
+                <Philosophy />
                 <Testimonials />
                 <Projects />
                 <PublicSpeaking />

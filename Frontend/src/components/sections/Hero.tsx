@@ -19,7 +19,7 @@ const Hero: React.FC = () => {
         <h1><span>Hi, I'm</span> Hamza Kamran</h1>
         <h2>Crafting Next-Gen Web Experiences</h2>
         <p>
-          I'm a passionate React.js developer with over 2 years of experience, specializing in 3D web development using Three.js and GSAP. Let's build something extraordinary together!
+          I'm a passionate web developer with over 2 years of experience, specializing in React.js and 3D web development using Three.js and GSAP. Let's build something extraordinary together!
         </p>
         <div className="hero-cta">
           <a href="#projects" className="cta-button">Explore My Work</a>

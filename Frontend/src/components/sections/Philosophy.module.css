@@ -1,0 +1,289 @@
+.philosophy {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 6rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.97), rgba(0, 0, 0, 0.92));
+}
+
+.gridBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(0, 231, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 231, 255, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.content {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  gap: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.imageSection {
+  flex: 1.2;
+  position: relative;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+}
+
+.mainImage {
+  position: relative;
+  width: 80%;
+  height: 600px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  transform: perspective(1000px) rotateY(-5deg);
+}
+
+.mainImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.95) contrast(1.1);
+}
+
+.imageOverlay {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  background: rgba(13, 27, 42, 0.95);
+  padding: 2rem;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 231, 255, 0.2);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transform: translateZ(20px);
+}
+
+.stat {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00E7FF, #6366F1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+  line-height: 1;
+}
+
+.statText {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.secondaryImage {
+  position: absolute;
+  top: 60%;
+  right: -5rem;
+  width: 320px;
+  height: 240px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+  transform: perspective(1000px) rotateY(-8deg) rotateX(5deg);
+}
+
+.secondaryImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+.textContent {
+  flex: 1;
+  padding-top: 2rem;
+}
+
+.textContent h2 {
+  font-size: clamp(2rem, 3.5vw, 2.2rem);
+  line-height: 1.2;
+  margin-bottom: 2rem;
+}
+
+.highlight {
+  display: block;
+  color: #00E7FF;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+}
+
+.emphasis {
+  display: block;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.accent {
+  display: block;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.description {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+  max-width: 600px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.feature {
+  background: rgba(13, 27, 42, 0.6);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 231, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.feature:hover {
+  background: rgba(13, 27, 42, 0.8);
+  border-color: rgba(0, 231, 255, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 231, 255, 0.1);
+}
+
+.featureTitle {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #00E7FF;
+  margin-bottom: 0.5rem;
+}
+
+.feature p {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+}
+
+@media (max-width: 1200px) {
+  .content {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .imageSection {
+    min-height: 500px;
+  }
+
+  .mainImage {
+    width: 100%;
+    height: 500px;
+    transform: none;
+  }
+
+  .secondaryImage {
+    width: 280px;
+    height: 200px;
+    right: -2rem;
+    transform: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .philosophy {
+    padding: 4rem 1.5rem;
+  }
+
+  .imageSection {
+    min-height: 400px;
+  }
+
+  .mainImage {
+    height: 400px;
+  }
+
+  .secondaryImage {
+    width: 240px;
+    height: 180px;
+    right: -1rem;
+    top: 70%;
+  }
+
+  .imageOverlay {
+    padding: 1.5rem;
+    bottom: 2rem;
+    left: 2rem;
+  }
+
+  .stat {
+    font-size: 2.5rem;
+  }
+
+  .statText {
+    font-size: 0.9rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .features {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .philosophy {
+    padding: 3rem 1rem;
+  }
+
+  .imageSection {
+    min-height: 300px;
+  }
+
+  .mainImage {
+    height: 300px;
+  }
+
+  .secondaryImage {
+    width: 160px;
+    height: 120px;
+    right: 0.5rem;
+  }
+
+  .textContent h2 {
+    font-size: 1.75rem;
+  }
+
+  .highlight {
+    font-size: 0.9rem;
+  }
+
+  .feature {
+    padding: 1.25rem;
+  }
+  .stat{
+    font-size: 1.5rem;
+  
+  }
+  .statText{
+    font-size: 0.8rem;
+  }
+} 

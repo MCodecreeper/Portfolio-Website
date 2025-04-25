@@ -10,6 +10,15 @@
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.85));
 }
 
+.skillsWrapper {
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
 .skills::before {
   content: '';
   position: absolute;
@@ -18,17 +27,14 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 30%),
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 30%),
     radial-gradient(circle at 80% 80%, rgba(0, 231, 255, 0.05) 0%, transparent 30%);
   pointer-events: none;
 }
 
 .content {
-  margin-top: 10rem;
-  margin-bottom: 10rem;
-  position: relative;
   width: 100%;
-  max-width: 1400px;
+  position: relative;
   z-index: 1;
 }
 
@@ -57,10 +63,9 @@
 
 .skillsContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
   position: relative;
   z-index: 1;
   padding: 0 1rem;
@@ -70,7 +75,8 @@
   display: flex;
   flex-direction: row;
   gap: 2rem;
-  flex: 1;
+  width: 100%;
+  justify-content: center;
 }
 
 .skillCategory {
@@ -210,16 +216,10 @@
 }
 
 @media (max-width: 1200px) {
-  .skillsContainer {
-    flex-direction: column;
-  }
-  
   .skillCategories {
-    gap: 1.5rem;
-  }
-  
-  .skillCategory {
-    padding: 1.5rem;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 800px;
   }
   
   .timelineContainer {
@@ -236,11 +236,7 @@
   
   .content h2 {
     font-size: 2.5rem;
-  }
-  
-  .skillCategories {
-    flex-direction: column;
-  }
+  }  
   
   .timelineContainer {
     position: relative;
@@ -270,5 +266,157 @@
     width: 60%;
     height: 60%;
     display: none;
+  }
+}
+
+.toolsRibbon {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-top: 5rem;
+}
+
+.toolsTrack {
+  display: flex;
+  gap: 3rem;
+  padding: 0.5rem;
+  animation: scroll 20s linear infinite;
+}
+
+.toolItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.toolItem:hover {
+  transform: translateY(-5px);
+}
+
+.toolItem svg {
+  width: 2rem;
+  height: 2rem;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.toolItem:hover svg {
+  color: #00E7FF;
+  transform: scale(1.1);
+}
+
+.toolItem span {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 1.5rem));
+  }
+}
+
+@media (max-width: 1440px) {
+  .toolsRibbon {
+    padding: 1.75rem;
+  }
+  
+  .toolsTrack {
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .toolsRibbon {
+    padding: 1.5rem;
+  }
+  
+  .toolsTrack {
+    gap: 2rem;
+  }
+  
+  .toolItem {
+    padding: 0.75rem;
+  }
+  
+  .toolItem svg {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .toolsRibbon {
+    padding: 1.25rem;
+  }
+  
+  .toolsTrack {
+    gap: 1.75rem;
+  }
+  
+  .toolItem {
+    padding: 0.5rem;
+  }
+  
+  .toolItem svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .toolItem span {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toolsRibbon {
+    padding: 1rem;
+  }
+  
+  .toolsTrack {
+    gap: 1.5rem;
+  }
+  
+  .toolItem svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .toolItem span {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .toolsRibbon {
+    padding: 1.5rem 0;
+  }
+
+  .toolItem {
+    padding: 0.875rem;
+  }
+
+  .toolsTrack {
+    gap: 2rem;
+  }
+
+  .toolItem svg {
+    width: 2rem !important;
+    height: 2rem !important;
+  }
+
+  .toolItem span {
+    font-size: 0.75rem;
   }
 }

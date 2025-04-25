@@ -1,26 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { FaReact, FaHtml5, FaCss3Alt, FaNodeJs, FaGitAlt, FaAws } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress } from 'react-icons/si';
+import { FaReact, FaHtml5, FaCss3Alt, FaNodeJs, FaGitAlt, FaAws, FaDocker, FaFigma } from 'react-icons/fa';
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiMongodb, SiExpress, SiPostgresql, SiWebpack, SiVercel } from 'react-icons/si';
+import { TbBrandThreejs } from 'react-icons/tb';
 import styles from './Skills.module.css';
+import { useInView } from 'react-intersection-observer';
 
 // Temporary placeholder for OrbitingTimeLine
-const OrbitingTimeLine = () => {
-  return (
-    <div style={{ 
-      width: '100%', 
-      height: '100%', 
-      display: 'flex', 
-      justifyContent: 'center', 
-      alignItems: 'center',
-      color: '#6366F1',
-      fontSize: '1.5rem',
-      fontWeight: 'bold'
-    }}>
-      Timeline
-    </div>
-  );
-};
+
 
 interface Skill {
   name: string;
@@ -67,84 +54,106 @@ const skillCategories: SkillCategory[] = [
   }
 ];
 
-const Skills: React.FC = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+const Skills = () => {
+  const [skillsRef, skillsInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          } else {
-            setIsVisible(false);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+  const [toolsRef, toolsInView] = useInView({
+    triggerOnce: false,
+    threshold: 0.2
+  });
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const toolsData = [
+    { icon: FaReact, name: 'React', color: '#61DAFB' },
+    { icon: SiNextdotjs, name: 'Next.js', color: '#000000' },
+    { icon: SiTypescript, name: 'TypeScript', color: '#3178C6' },
+    { icon: FaNodeJs, name: 'Node.js', color: '#339933' },
+    { icon: SiMongodb, name: 'MongoDB', color: '#47A248' },
+    { icon: SiPostgresql, name: 'PostgreSQL', color: '#336791' },
+    { icon: SiTailwindcss, name: 'Tailwind', color: '#06B6D4' },
+    { icon: TbBrandThreejs, name: 'Three.js', color: '#000000' },
+    { icon: FaGitAlt, name: 'Git', color: '#F05032' },
+    { icon: FaDocker, name: 'Docker', color: '#2496ED' },
+    { icon: SiWebpack, name: 'Webpack', color: '#8DD6F9' },
+    { icon: SiVercel, name: 'Vercel', color: '#000000' },
+    { icon: FaFigma, name: 'Figma', color: '#F24E1E' }
+  ];
 
   return (
-    <section id="skills" className={styles.skills} ref={sectionRef}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={styles.content}
-      >
-        <h2>Skills</h2>
-        <div className={styles.skillsContainer}>
-          <div className={styles.skillCategories}>
-            {skillCategories.map((category, index) => (
-              <motion.div
-                key={category.title}
-                className={styles.skillCategory}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: false }}
+    <section id="skills" className={styles.skills}>
+      <div className={styles.skillsWrapper}>
+        <motion.div
+          ref={skillsRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={skillsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6 }}
+          className={styles.content}
+        >
+          <h2>Skills</h2>
+          <div className={styles.skillsContainer}>
+            <div className={styles.skillCategories}>
+              {skillCategories.map((category, index) => (
+                <motion.div
+                  key={category.title}
+                  className={styles.skillCategory}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={skillsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <h3 className={styles.categoryTitle}>{category.title}</h3>
+                  <div className={styles.skillList}>
+                    {category.skills.map((skill) => (
+                      <div key={skill.name} className={styles.skillItem}>
+                        <div className={styles.skillName}>
+                          <span className={styles.skillIcon}>
+                            <skill.icon size={20} color={skill.color} />
+                          </span>
+                          <span>{skill.name}</span>
+                        </div>
+                        <div className={styles.progressBar}>
+                          <motion.div
+                            className={styles.progressFill}
+                            initial={{ width: 0 }}
+                            animate={skillsInView ? { width: `${skill.level}%` } : { width: 0 }}
+                            transition={{ duration: 1, delay: 0.2 + index * 0.1 }}
+                          />
+                        </div>
+                        <div className={styles.skillLevel}>{skill.level}%</div>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          ref={toolsRef}
+          className={styles.toolsRibbon}
+          initial={{ opacity: 0, y: 50 }}
+          animate={toolsInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <div className={styles.toolsTrack}>
+            {[...toolsData, ...toolsData].map((tool, index) => (
+              <motion.div 
+                key={`${tool.name}-${index}`}
+                className={styles.toolItem}
+                whileHover={{ 
+                  scale: 1.1,
+                  filter: 'brightness(1.2)',
+                  transition: { duration: 0.2 }
+                }}
               >
-                <h3 className={styles.categoryTitle}>{category.title}</h3>
-                <div className={styles.skillList}>
-                  {category.skills.map((skill) => (
-                    <div key={skill.name} className={styles.skillItem}>
-                      <div className={styles.skillName}>
-                        <span className={styles.skillIcon}>
-                          <skill.icon size={20} color={skill.color} />
-                        </span>
-                        <span>{skill.name}</span>
-                      </div>
-                      <div className={styles.progressBar}>
-                        <motion.div
-                          className={styles.progressFill}
-                          initial={{ width: 0 }}
-                          animate={isVisible ? { width: `${skill.level}%` } : { width: 0 }}
-                          transition={{ duration: 1, delay: 0.2 }}
-                        />
-                      </div>
-                      <div className={styles.skillLevel}>{skill.level}%</div>
-                    </div>
-                  ))}
-                </div>
+                <tool.icon style={{ color: tool.color }} />
+                <span>{tool.name}</span>
               </motion.div>
             ))}
           </div>
-        </div>
-      </motion.div>
-      <div className={styles.timelineContainer}>
-        <OrbitingTimeLine />
+        </motion.div>
       </div>
     </section>
   );
