@@ -15,13 +15,13 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: 'E-Commerce Platform',
+    title: '3D Chair Visualizer',
     description:
-      'A full-stack e-commerce solution with real-time inventory, payment processing, and admin dashboard.',
-    techStack: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    liveLink: '',
-    githubLink: 'https://github.com/MCodecreeper/BUXAAR.git',
-    image: '/assets/ecommerce.png',
+      'A real time 3D chair visualizer revolutionizing the experience of E-Commerce in real perspective. Bridging the gap of online and physical shopping',
+    techStack: ['Next', 'TailwindCSS', 'Three.js', 'Framer Motion'],
+    liveLink: 'https://3-d-chair-visualizer.vercel.app/',
+    githubLink: 'https://github.com/MCodecreeper/3D-chair-Visualizer',
+    image: '/assets/3D_chair_visualizer.png',
   },
   {
     title: 'ZAARIC',
@@ -35,7 +35,7 @@ const projects: Project[] = [
   {
     title: '3D Portfolio',
     description:
-      'Interactive 3D portfolio website showcasing projects with Three.js animations.',
+      'Interactive 3D portfolio website showcasing projects with Three.js animations. Maintaining an amazing user experience along with serenity. ',
     techStack: ['React', 'Three.js', 'GSAP', 'TypeScript'],
     liveLink: '#',
     githubLink: 'https://github.com/MCodecreeper/Portfolio-Website.git',
