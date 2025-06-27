@@ -41,6 +41,15 @@ const projects: Project[] = [
     githubLink: 'https://github.com/MCodecreeper/Portfolio-Website.git',
     image: '/assets/3d_portfolio.png',
   },
+  {
+    title: 'BUXAAR',
+    description:
+      'Advanced E-Commerce platform with 15+ interfaces, modern UI and smooth animations. ',
+    techStack: ['React', 'TailwindCSS', 'GSAP', 'TypeScript'],
+    liveLink: '',
+    githubLink: 'https://github.com/MCodecreeper/BUXAAR',
+    image: '/assets/ecommerce.png',
+  },
 ];
 
 const Projects: React.FC = () => {

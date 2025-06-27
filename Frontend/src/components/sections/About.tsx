@@ -5,7 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import OrbitingTimeline from '../3d/OrbitingTimeLine';
 import styles from './About.module.css';
 
-const profileImage = '/assets/hamza.png';
+const profileImage = '/assets/hamza.jpg';
 
 interface Stat {
   value: number;

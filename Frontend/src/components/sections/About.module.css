@@ -106,16 +106,16 @@
   height: 500px;
   border-radius: 20px;
   overflow: hidden;
-  border: 2px solid #00E7FF;
   box-shadow: 0 0 30px rgba(0, 231, 255, 0.2);
 }
 
 .profileImage {
-  width: 100%;
+  padding-left: 5%;
+  width: 86%;
   height: 100%;
-  object-fit: cover;
-  filter: brightness(1.1) contrast(1.2);
-  transform: scale(1.2);
+  object-fit:contain;
+  filter: brightness(1.1) contrast(1);
+  transform: scale(1.4);
   transition: transform 0.3s ease;
 }
 
@@ -126,11 +126,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    45deg,
-    rgba(0, 231, 255, 0.1),
-    rgba(0, 0, 0, 0.3)
-  );
+  
   z-index: 1;
 }
 
