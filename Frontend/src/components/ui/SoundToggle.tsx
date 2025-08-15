@@ -7,7 +7,6 @@ export const SoundToggle = () => {
   const { toggleMute, isMuted, playClick } = useSound();
 
   const handleToggle = () => {
-    console.log('Sound toggle clicked, current state:', isMuted);
     toggleMute();
     playClick();
   };

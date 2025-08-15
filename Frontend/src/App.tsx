@@ -7,6 +7,7 @@ import Navigation from './components/navigation';
 import Hero from './components/sections/Hero';
 import About from './components/sections/About';
 import Skills from './components/sections/Skills';
+import QimamFellowship from './components/sections/QimamFellowship';
 import Projects from './components/sections/Projects';
 import Contact from './components/sections/Contact';
 import Footer from './components/sections/Footer';
@@ -71,6 +72,7 @@ function App() {
                 <Philosophy />
                 <Testimonials />
                 <Projects />
+                <QimamFellowship />
                 <PublicSpeaking />
                 <Contact />
               </main>

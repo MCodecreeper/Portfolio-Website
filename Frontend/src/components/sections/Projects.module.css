@@ -35,11 +35,11 @@
 .projectCard {
   opacity: 0;
   transform: translateY(2rem);
-  transition: opacity 0.3s ease-out; /* Smooth reset when leaving */
+  transition: opacity 0.3s ease-out;
 }
 
 /* When in view: animate in */
-.inView  .projectsHeader h2{
+.inView .projectsHeader h2 {
   opacity: 0;
   transform: translateY(-1rem);
   animation: fadeInUp 0.6s ease-out forwards;
@@ -64,7 +64,7 @@
   animation-delay: 0.9s;
 }
 
-/* Rest of the unchanged styles */
+/* Projects Header */
 .projectsHeader {
   text-align: center;
   margin-bottom: 80px;
@@ -73,7 +73,7 @@
 
 .projectsHeader h2 {
   font-size: 3.5rem;
-  color: #E0E7FF;;
+  color: #E0E7FF;
   margin-bottom: 20px;
   background-clip: text;
   text-shadow: 0 0 20px rgba(0, 231, 255, 0.3);
@@ -92,15 +92,161 @@
   background: linear-gradient(90deg, transparent, #00e7ff, transparent);
 }
 
-.projectGrid {
+/* Slider Container */
+.sliderContainer {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 80px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Slider Track */
+.sliderTrack {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.sliderContent {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 20px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Navigation Buttons */
+.navButton {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 231, 255, 0.1), rgba(0, 231, 255, 0.05));
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border: 2px solid rgba(0, 231, 255, 0.3);
+  overflow: hidden;
+}
+
+.navButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(0, 231, 255, 0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navButton:hover::before {
+  opacity: 1;
+}
+
+.navButton:hover {
+  transform: scale(1.1);
+  border-color: #00e7ff;
+  box-shadow: 
+    0 0 30px rgba(0, 231, 255, 0.4),
+    0 0 60px rgba(0, 231, 255, 0.2),
+    inset 0 0 20px rgba(0, 231, 255, 0.1);
+}
+
+.navButton:active {
+  transform: scale(0.95);
+}
+
+/* Arrow Icon */
+.arrowIcon {
+  position: relative;
+  z-index: 2;
+  color: #00e7ff;
+  transition: all 0.3s ease;
+}
+
+.navButton:hover .arrowIcon {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* Previous Button Specific */
+.prevButton {
+  left: 0;
+}
+
+.prevButton:hover {
+  transform: scale(1.1) translateX(-5px);
+}
+
+/* Next Button Specific */
+.nextButton {
+  right: 0;
+}
+
+.nextButton:hover {
+  transform: scale(1.1) translateX(5px);
+}
+
+/* Slider Dots */
+.sliderDots {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+  position: relative;
+  z-index: 5;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 231, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: #00e7ff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.dot:hover {
+  background: rgba(0, 231, 255, 0.5);
+  transform: scale(1.2);
+}
+
+.dot.activeDot {
+  background: rgba(0, 231, 255, 0.8);
+  box-shadow: 0 0 20px rgba(0, 231, 255, 0.6);
+}
+
+.dot.activeDot::before {
+  width: 100%;
+  height: 100%;
+}
+
+/* Project Cards - Keep exact same styling */
 .projectCard {
   position: relative;
   background: rgba(13, 27, 42, 0.8);
@@ -236,9 +382,18 @@
   background: rgba(0, 231, 255, 0.1);
 }
 
+/* Responsive Design */
 @media (max-width: 1200px) {
-  .projectGrid {
-    grid-template-columns: repeat(2, 1fr);
+  .sliderContainer {
+    padding: 20px 60px;
+  }
+  
+  .navButton {
+    width: 50px;
+    height: 50px;
+  }
+
+  .sliderContent {
     gap: 30px;
   }
 }
@@ -252,13 +407,142 @@
     font-size: 2.5rem;
   }
 
-  .projectGrid {
-    grid-template-columns: 1fr;
-    gap: 40px;
+  .sliderContainer {
+    padding: 20px 40px;
+    gap: 15px;
+  }
+
+  .sliderContent {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+
+  .navButton {
+    width: 45px;
+    height: 45px;
   }
 
   .projectCardCanvas {
-    height: 250px;
+    height: 220px;
+  }
+
+  .projectCardContent {
+    padding: 20px;
+  }
+
+  .projectCardContent h3 {
+    font-size: 1.5rem;
+  }
+
+  .projectCardContent p {
+    font-size: 0.9rem;
+  }
+
+  .techStack {
+    gap: 8px;
+  }
+
+  .techBadge {
+    padding: 4px 10px;
+    font-size: 0.8rem;
+  }
+
+  .projectLinks {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .projectLink {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects {
+    padding: 60px 15px;
+  }
+
+  .projectsHeader h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .projectsHeader {
+    margin-bottom: 50px;
+  }
+
+  /* Hide navigation arrows on mobile */
+  .navButton {
+    display: none !important;
+  }
+
+  /* Center the slider content on mobile */
+  .sliderContainer {
+    padding: 15px 20px;
+    justify-content: center;
+  }
+
+  .sliderTrack {
+    max-width: 100%;
+  }
+
+  /* Show only ONE project at a time on mobile */
+  .sliderContent {
+    grid-template-columns: 1fr;
+    gap: 0;
+    justify-items: center;
+  }
+
+  .projectCard {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .projectCardCanvas {
+    height: 200px;
+  }
+
+  .projectCardContent {
+    padding: 18px;
+  }
+
+  .projectCardContent h3 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+
+  .projectCardContent p {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+
+  .techStack {
+    margin-bottom: 15px;
+  }
+
+  .techBadge {
+    padding: 3px 8px;
+    font-size: 0.75rem;
+  }
+
+  .projectLinks {
+    gap: 8px;
+  }
+
+  .projectLink {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+
+  .sliderDots {
+    margin-top: 30px;
+    gap: 10px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
   }
 }
 

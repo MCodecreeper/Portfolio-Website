@@ -26,28 +26,26 @@
 .header h2 {
   font-size: 3rem;
   color: #E0E7FF;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  background: linear-gradient(90deg, #E0E7FF, #8A9CFF);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(0, 231, 255, 0.3);
+  position: relative;
+  display: inline-block;
 }
 
 .header h2::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 150px;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #6366F1, transparent);
+  font-size: 3rem;
+  color: #E0E7FF;
+  margin-bottom: 20px;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(0, 231, 255, 0.3);
+  position: relative;
+  display: inline-block;
 }
 
 .subtitle {
   font-size: 1.2rem;
-  color: #8A9CFF;
+  color: rgb(0, 229, 255);
   font-weight: 300;
   letter-spacing: 1px;
 }
@@ -234,7 +232,7 @@
   }
 
   .header h2 {
-    font-size: 2.5rem;
+    font-size: 1.7rem;
   }
 
   .eventsContainer {

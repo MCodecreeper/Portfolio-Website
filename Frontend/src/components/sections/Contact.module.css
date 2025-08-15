@@ -235,10 +235,15 @@ textarea.formInput {
 
   .contactInfo {
     order: 2;
+    display:block;
+    
   }
+
 
   .contactForm {
     order: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .contactHeader h2 {
